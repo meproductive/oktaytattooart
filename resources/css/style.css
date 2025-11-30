@@ -1,0 +1,879 @@
+﻿/* ---------------------------------------------------
+   VARIABLES
+--------------------------------------------------- */
+:root {
+    /* colors */
+    --color-white: hsl(255, 100%, 100%);
+    --color-bg-black: hsl(0, 0%, 0%);  /* 1 */
+    --color-bg-dark-09: hsla(0, 0%, 0%, 0.9); /* 0.9 */
+    --color-overlay-06:  hsla(0, 0%, 0%, 0.6); /* 0.6 */
+    --color-gray: #ccc;
+    --color-whatsapp-green: #4CAF50;
+    --color-instagram-tiktok-red: #F50057;
+    --color-tiktok-cyan: #24f6f0;
+    /* fonts */
+    --font-roboto: "Roboto", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    --font-prata: "Prata", serif;
+    --font-abril-fatface: "Abril Fatface", serif;
+    /* z-index layout */
+    --layer-behind: -1;
+    --layer-mid: 0;
+    --layer-front: 1;
+    --layer-top: 2;
+}
+
+/* ---------------------------------------------------
+   GLOBAL & GROUPS & TEXT
+--------------------------------------------------- */
+
+html { scroll-behavior: smooth; box-sizing: border-box; }
+
+*, *::before, *::after { box-sizing: inherit; }
+
+body, button { color: var(--color-white) !important; font-family: var(--font-roboto); font-weight: 300; }
+
+h2, figcaption, .stat-label, #popular-quote, .switcher, .award-description p { text-align: center; }
+
+strong { font-weight: 400; font-style: normal; }
+
+body, h1, h2, h3, p, ul, figure, blockquote, button { margin: 0; padding: 0; }
+
+img, video { display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; }
+
+a, i, button { cursor: pointer; }
+
+button { border: none; background-color: transparent; }
+
+/* All these items are in order just like their order in HTML */
+
+#hamburger-btn, #x-btn { width: 1.875rem; height: 1.875rem; } /* Hamburger button's and booking modal's custom X button's wraps' 30px width and height */
+
+#hero, #intro, #booking-appointment, #about-me-section, #popular-gallery-section, #carousel-section { height: 100dvh !important; } /* #intro is set to 100vh down below with other items */ 
+@media only screen and (orientation: landscape) and (max-height: 769px) { /* Resetting height: 100vh; to 100% to prevent overlayings */
+    #about-me-section, #popular-gallery-section, #carousel-section { height: 100% !important; overflow: hidden; } #popular-gallery-section, #carousel-section { padding: 6rem 0 !important; gap: 6rem !important; } 
+}
+
+#hero, #quote-highlight, #booking-modal, #booking-socials, .photo-card, #about-me-section, .stat-item, #popular-gallery-section, #popular-gallery-figure, #carousel-section, #carousel-section-item, .switcher-wrapper, #aftercare-article, #footer-container, #map-container { display: flex; flex-direction: column; } /* <--- All these items have two or more items nested inside, instead of grid layout I preferred flex-box column layout because as I've mentioned some of have more than two items nested so I could solve by applying two these props and values in short hand */
+
+#social-menu, #header, #menu, #burger-line::before, #burger-line::after, #intro-article, #x-line, #booking-appointment, .title-wrapper, .card-description, .status-container, #about-me, #popular-quote-wrapper, #popular-gallery-container, #carousel-article, #carousel-quote, #carousel-container, #carousel-inner, .carousel-img-container, #footer-nav, #social-medias { display: flex; } /* <--- All these items have flex-box layout and some are aligned center, justified center, both below or not centered due to their layouts */
+
+#social-menu, #popular-gallery-section, #carousel-section, #carousel-article, .carousel-img-container { justify-content: center; } /* <--- All these items are flex-box and only justified center */
+
+#header, #menu, #hamburger-btn, .title-wrapper, .card-description, .switcher-wrapper, #carousel-inner, #footer-container, #footer-nav, #map-container { align-items: center; } /* <--- All these items are flex-box and only aligned center */
+
+#booking-appointment, #booking-socials, #about-me-section, .stat-item, #about-me, #popular-gallery-figure, #popular-quote-wrapper, #carousel-quote { justify-content: center; align-items: center; } /* <--- All these items are flex-box and in both axis centered */
+
+#page-content, #hamburger-btn, #x-btn, #photo-gallery, .switcher-wrapper, #carousel-container, #popular-gallery-figure, .photo-card, .status-container, .stat-item, .stat-number, .stat-label, #tiktok-glitch { position: relative; } /* <--- All these items are positioned relatively on a purpose */
+
+#burger-line, #burger-line::before, #burger-line::after, #glassy-button, #glassy-button::before, #quote-highlight, #booking-appointment, #x-line, #x-line::after, .card-description, .stat-icon, #ink-img, .carousel-control, .switcher, #tiktok-glitch i { position: absolute; } /* <--- All these items are positioned absolutely on a purpose */
+
+#burger-line, #burger-line::before, #burger-line::after, #video-container:after, #glassy-button::before, #booking-appointment, #x-line, #x-line::after, .photo-card img, .card-description, .profile-photo, .gallery-item img, .switcher, .carousel-item img, .award-description, #map-container { width: 100%; } /* <--- All these items width property set to 100% due to their layouts */
+
+#header, #intro-article, .title-wrapper, #photo-gallery, #about-me, #carousel-container, #aftercare-section { padding: 0rem 7%; } /* <--- All these items are having on the right and left white-spaces */
+
+#video-container, .photo-card, .stat-item, .switcher-wrapper, #carousel-container { overflow: hidden; } /* !Important layout feature don't change unless it's strictly necessary */
+
+.photo-card img, .gallery-item img { height: 100%; object-fit: cover; } /* important propert: value; pairs > display: block; width: 100% - defined in global scope or group above */
+
+main, #intro { background-color: var(--color-bg-dark-09); }
+footer, #blackout-overlay, #about-me-section, #popular-gallery-section ,#carousel-section { background-color: var(--color-bg-black); }
+#burger-line, #burger-line::before, #burger-line::after,  #hamburger-btn.active #burger-line::before,  #hamburger-btn.active #burger-line::after, #x-line, #x-line::after, .line { background-color: var(--color-white); }
+
+strong, #profile-figure figcaption, #popular-quote, #carousel-quote, .switcher  { font-family: var(--font-prata); }
+a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important */
+/* Opacity value */
+.fade-in-animation, #booking-appointment, .subtitle, [data-animate], .stat-icon, .switcher { opacity: 0; }
+#booking-appointment.active, .title-wrapper.draw-title, [data-glow] { opacity: 1; }
+
+#custom-background { z-index: var(--layer-behind); } /* Index value is -1 */
+#video-container, .stat-icon, #ink-img { z-index: var(--layer-mid); } /* Index value is 0 */
+#primary-social, #hamburger-btn, #glassy-button, #video-container:after, .stat-item, .carousel-item, .carousel-control, #popular-quote-wrapper { z-index: var(--layer-front); } /* Index value is 1 */
+#header, #booking-appointment, #blackout-overlay { z-index: var(--layer-top); } /* Index value is 2 */
+
+/* ---------------------------------------------------
+   LAYOUT UTILITIES - HELPERS
+--------------------------------------------------- */
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+.a-items-center { align-items: center; }
+.top-0 { top: 0; }
+.left-0 {left: 0; }
+.wh-100 { width: 100%; height: 100%; }
+/* ---------------------------------------------------
+   GLOBAL ANIMATIONS
+--------------------------------------------------- */
+
+.opacity-animation { animation: opacity 2s; }
+@keyframes opacity { from {opacity: 0;} to {opacity: 1;} }
+
+@keyframes fadeindown {
+    0% {
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeindownright {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50) rotate(70deg);
+    }
+}
+
+@keyframes fadeinleft {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes fadeinright {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes fadeinup {
+    0% {
+        opacity: 0;
+        transform: translateY(150px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.fade-in-left { animation: fadeinleft 1s forwards; }
+.fade-in-right { animation: fadeinright 1s forwards; }
+.fade-in-down { animation: fadeindown 1s forwards; }
+.fade-in-down-right { animation: fadeindownright 1s forwards; animation-delay: 1s; }
+.fade-in-up { animation: fadeinup 1s forwards; animation-delay: 0.4s; }
+/* ---------------------------------------------------
+   BACKGROUND & WRAPPERS
+--------------------------------------------------- */
+
+/* Background Image */
+#custom-background {
+    position: fixed;
+    background: url(../media/backgroundSkull.webp) no-repeat;
+    background-position: center;
+    background-size: clamp(20rem, 60vw, 40rem);
+    pointer-events: none;
+}
+/* ---------------------------------------------------
+   HERO - ASIDE & HEADER & INTRO & BOOKING
+--------------------------------------------------- */
+
+/* Aside, Header and Intro Wrapper */
+
+/* Aside */
+#social-menu li a i { /* #social-menu is a flex-box justify centered */
+    color: var(--color-white); /* !important .fa-whatsapp's default color is green */
+    font-size: clamp(1.6rem, 2.9vw, 2.3rem);
+    margin: 0.3rem 0.4rem;
+}
+
+#whatsapp-icon:hover { color: var(--color-whatsapp-green); }
+
+#instagram-icon:hover { color: var(--color-instagram-tiktok-red) }
+
+#tiktok-icon:hover {
+    color: var(--color-white);
+    filter: drop-shadow(-0.5px -0.5px 0 var(--color-tiktok-cyan)) contrast(150%) brightness(110%);
+}
+
+#tiktok-icon:hover::before { filter: drop-shadow(1px 1px 0 var(--color-instagram-tiktok-red)) contrast(150%) brightness(110%); }
+
+/* Header */
+#header { /* !important property: value; pairs > display: flex; align-items: center; padding: 0 7%; z-index: 2; - defined at the top of the file */
+    justify-content: space-between;
+    padding-top: 2rem;
+}
+
+#title strong { font-size: clamp(1.6rem, 4.3vw, 3.3rem); }
+
+#menu li { padding: 0rem 1rem; }
+#menu li:last-child { padding-right: 0; }
+#menu li a { font-size: 1.1em; }
+
+/* Hamburger Menu */
+#hamburger-btn {
+    display: none;
+}
+
+#burger-line { /* !important property: value; pairs > position: absolute; width: 100%; - defined at the top of the file */
+    top: 50%;
+    height: 0.1875rem;
+    transform: translateY(-50%);
+}
+
+#burger-line, #burger-line::before, #burger-line::after { transition: transform 0.3s; will-change: transform; } /* !important property: value; pairs > position: absolute; background-color: var(--color-white); width: 100%; - defined at the top of the file */
+
+#burger-line::before, #burger-line::after { /* !important property: value; pairs > display: flex; position: absolute; width: 100%; background-color: var(--color-white); - defined at the top of the file */
+    content: '';
+    height: 0.1875rem;
+}
+
+#burger-line::before { top: -0.5rem; }
+#burger-line::after { bottom: -0.5rem; }
+
+/* Header media queries */
+
+@media (max-width: 1024px) {
+    #navigation {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100vh;
+        background-color: var(--color-bg-dark-09);
+        backdrop-filter: blur(5px);
+        animation: opacity 0.5s ease-out;
+    }
+
+    #navigation.active { display: flex; }
+
+    #menu { /* !important property: value; pairs > display: flex; align-items: center; - defined at the top of the file */
+        display: block;
+        margin: auto;
+        text-align: center;
+    }
+
+    #menu li { animation: fadeinright 0.5s forwards; animation-fill-mode: both; animation-delay: 0.6s; padding: 1rem 0; } #menu li:nth-child(2) { animation-delay: 0.65s; } #menu li:nth-child(3) { animation-delay: 0.70s; } #menu li:nth-child(4) { animation-delay: 0.75s; }
+    #menu li a { font-size: 1.5em; }
+
+    #hamburger-btn { display: flex; } /* !important property: value; pairs > position: relative; align-items: center; width: 1.875rem; height: 1.875rem; z-index: 1; - defined at the top of the file */
+    #hamburger-btn.active #burger-line { background-color: transparent; }
+    #hamburger-btn.active #burger-line::before { transform: translateY(0.5rem) rotate(45deg); }
+    #hamburger-btn.active #burger-line::after { transform: translateY(-0.5rem) rotate(-45deg); }
+}
+
+/* Intro video content */
+/* #intro important property: value; pairs > height: 100vh !important; background-color: var(--color-bg-dark-09); - defined at the top of the file */
+#intro, #blackout-overlay, #video-container, #video-container:after { position: absolute; width: 100%; height: 100%; inset: 0; /* inset: 0; > equal to top, right, bottom, left - 0 */ } /* Only absolutely positioned items can be set to inset 0, these prop value pairs are important don't change unless strictly necessary */ 
+
+#blackout-overlay { /* important property: value; pairs > z-index: 2; background-color: var(--color-bg-black); - defined at the top of the file */
+    transform: translateY(0);
+    animation: blackoutUp 1s forwards;
+}
+
+@keyframes blackoutUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+/* #video-container has more property: value; pairs > z-index: 0; overflow: hidden; - defined at the top of the file */
+#video-container:after {	
+    content: "";
+	background-color: var(--color-overlay-06);
+}
+
+#intro-video { object-fit: cover; } /* width: 100%; height: 100%; defined as a class name */
+
+@media (max-width: 1250px) { /* positioning intro video */
+    #intro-video.played { object-position: 40%; }
+}
+@media (max-width: 768px) { /* positioning intro video */
+    #intro-video.played { object-position: 30%; }
+}
+
+#quote-highlight { /* important property: value; pairs > display: flex; flex-direction: column; position: absolute; - defined at the top of the file */
+    top: 21%;
+    right: 7%;
+    margin-right: -0.3rem;
+}
+
+#quote-highlight strong {
+    font-size: clamp(1.5rem, 4vw, 3.6rem);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: right;
+}
+
+#quote-highlight strong:first-child { font-size: clamp(2.3rem, 6vw, 5.6rem); }
+
+#quote-highlight strong:nth-child(5) {
+    font-size: clamp(2.2rem, 5.5vw, 5.3rem);
+    letter-spacing: 0.15em;
+    margin-right: -0.5rem;
+}
+
+/* #intro-article blockquote strong:last-child {font-size: clamp(0.6em, 1.8vmax, 3em);letter-spacing: 0.04em;} */
+
+.fade-in-animation {
+    animation: fadeinright 1s forwards;
+    animation-fill-mode: both;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+#glassy-button { /* important property: value; pairs > position: absolute; - defined at the top of the file */
+    top: 21%;
+    left: 7%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5em;
+    font-size: clamp(1.1em, 2.6vw, 2.5em);
+    padding: 0.6em 1.2em;
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s, border 0.3s;
+}
+
+#glassy-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#booking-appointment { /* important property: value; pairs > display: flex; justify-content: center; align-items: center; position: absolute; width: 100%; opacity: 0; z-index: 2; height: 100vh !important; - defined at the top of the file */
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(0px);
+    visibility: hidden;
+    inset: 0;
+}
+
+#booking-appointment.active {
+    visibility: visible;
+    backdrop-filter: blur(1px);
+    transition: opacity 0.5s ease-out, backdrop-filter 1s ease-out;
+}
+
+#booking-modal { /* important property: value; pairs > display: flex; flex-direction: column;  */
+    width: clamp(340px, 90vw, 680px);
+    height: 50vh;
+    backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5rem;
+}
+
+#x-btn { align-self: flex-end; } /* important property: value; pairs > position: relative; width: 1.875rem; height: 1.875rem; - defined at the top of the file - !important with the current style props, values don't set any padding to give some space around! */
+
+#x-line { /* important property: value; pairs > display: flex; position: absolute; width: 100%; background-color: var(--color-white); - defined at the top of the file */
+    height: 0.1875rem;
+    top: 10%;
+    will-change: transform;
+    transform: translateY(10px) rotate(50deg);
+}
+
+#x-line::after { /* important property: value; pairs > position: absolute; width: 100%; background-color: var(--color-white); - defined at the top of the file */
+    content: "";
+    height: 0.1875rem;
+    top: 10px;
+    transform: translateY(-10px) rotate(-100deg);
+}
+
+#booking-socials { /* important property: value; pairs > display: flex; flex-direction: column; justify-content: center; align-items: center; - defined at the top of the file */ 
+    gap: 2rem;
+    height: 100%;
+}
+
+#booking-socials :is(h2, li a) {font-size: clamp(1.3rem, 5.3vw, 2rem);}
+
+#booking-socials p { font-size: clamp(0.9rem, 3.9vw, 1.3rem); }
+
+#booking-socials li a i {
+    font-size: clamp(1.5rem, 1.8vw, 2.2rem);
+    margin-left: 1rem;
+}
+
+/* Intro media queries */
+@media only screen and (orientation: landscape) and (max-height: 500px) {
+    #quote-highlight, #glassy-button { top: 30%; }
+    #quote-highlight strong  { font-size: 3.6vw; } #intro-article blockquote strong:first-child { font-size: 4.9vw; } #intro-article blockquote strong:nth-child(5) { font-size: 5.3vw; }
+}
+@media only screen and (orientation: landscape) and (max-height: 768px) and (min-width: 769px) {
+    #quote-highlight, #glassy-button { top: 30%; }
+    #quote-highlight strong  { font-size: 3vw; } #intro-article blockquote strong:first-child { font-size: 4.3vw; } #intro-article blockquote strong:nth-child(5) { font-size: 4.6vw; }
+}
+@media only screen and (orientation: portrait) and (min-width: 380px) and (max-width: 879px) { 
+    #quote-highlight, #glassy-button { top: 18%; } #quote-highlight strong { line-height: 1.6;}
+}
+@media only screen and (orientation: portrait) and (min-width: 410px) and (min-height: 880px) {  
+    #quote-highlight, #glassy-button { top: 15%;} #quote-highlight strong { line-height: 1.7;}
+}
+@media only screen and (orientation: portrait) and (min-width: 500px) and (max-width: 1367px) {
+    #quote-highlight, #glassy-button { top: 15%; }
+    #quote-highlight strong  { font-size: 4.6vw; } #quote-highlight strong:first-child { font-size: 6.3vw; } #quote-highlight strong:nth-child(5) { font-size: 6.6vw; }
+}
+/* ---------------------------------------------------
+    MAIN CONTENT TITLES & PHOTO GALLERY & ABOUT ME & POPULAR GALLERY & CAROUSEL & AFTER CARE
+--------------------------------------------------- */
+
+/* Subtitle styling */
+.title-section { padding: 1rem 0; }
+
+.title-wrapper .line { transform: scaleX(0); } /* important property: value; pairs > display: flex; align-items: center; padding: 0 7%; - defined at the top of the file */
+
+.line {
+    flex: 1;
+    height: 1px;
+    border: none;
+}
+
+.subtitle { /* important property: value; pairs > text-align: center; opacity: 0; - defined at the top of the file */
+    padding: 2rem 1rem;
+    font-size: clamp(1.5rem, 2.9vmax, 2.9rem);
+    font-weight: 300;
+}
+
+@keyframes drawLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.title-wrapper.draw-title .line:first-of-type {
+    transform-origin: left;
+    animation: drawLine 1s ease-out forwards;
+}
+
+.title-wrapper.draw-title .line:last-of-type {
+    transform-origin: right;
+    animation: drawLine 1s ease-out forwards;
+}
+
+.title-wrapper.draw-title .subtitle {
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 1s;
+}
+
+/* Showcase photo gallery */
+#photo-gallery { /* important property: value; pairs > display: grid; position: relative; - defined at the top of the file */
+    grid-template-columns: repeat(auto-fill, minmax(clamp(180px, 27vw, 230px), 1fr));
+    gap: 1.5rem;
+    justify-content: start;
+}
+
+.photo-card { /* important property: value; pairs > display: flex; flex-direction: column; position: relative; overflow: hidden; - defined at the top of the file */
+    justify-self: start;
+    margin-bottom: 2rem;
+    aspect-ratio: 4/6;
+}
+
+.card-description { /* important property: value; pairs > position: absolute; - defined at the top of the file */
+    bottom: 0;
+    justify-content: space-between;
+}
+
+.card-description h2 {
+    font-family: var(--font-abril-fatface);
+    font-size: clamp(1.1rem, 4.3vw, 2.1rem);
+    margin: 0 0 0 0.5rem;
+}
+
+.card-description p {
+    font-size: clamp(0.6rem, 2.9vw, 1.1rem);
+    align-self: flex-end;
+    padding: 0 0 0.5rem 0;
+    margin: 0 0.5rem 0 0;
+}
+
+.card-description :is(h2, p)  { font-weight: 100; } 
+
+/* Photo gallery media queries */
+@media (max-width: 768px) {
+    .photo-card { margin-bottom: 0; }
+    .card-description p {
+        padding: 0 0 0.2rem;
+    }  
+}
+
+@media (max-width: 682px) {
+    #photo-gallery { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+
+@media (max-width: 576px) {
+    #photo-gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
+
+@media (max-width: 412px) {
+    #photo-gallery { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+}
+
+/* About me */
+#about-me-section { /* important property: value; pairs > display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--color-bg-black); height: 100vh !important; - defined at the top of the file */
+    padding: 2rem 1rem;
+    gap: 6rem;
+}
+
+#about-me-status-wrapper { /* important property: value; pairs > display: grid; */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+/* #status-container has important property: value; pairs > display: flex; position: relative; - defined at the top the file */
+.stat-icon {
+    top: 95%;
+    left: 65%;
+    transform: translate(-50%, -50%) rotate(70deg);
+    width: clamp(80px, 18vw, 165px);
+    height: auto;
+    pointer-events: none;
+}
+
+.stat-item { /* important property: value; pairs > display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; z-index: 1; - defined at the top of the file */
+    background-color: #121212;
+    border-radius: 50%;
+    width: clamp(75px, 20vw, 160px);
+    height: clamp(75px, 20vw, 160px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+#star {
+    top: 100%;
+    left: 70%;
+}
+
+#cup {
+    top: 100%;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+#sterile {
+    top: 105%;
+    left: 70%;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.stat-number { font-size: clamp(1rem, 2.6vw, 1.8rem); } /* important property: value; pairs > position: relative; - defined at the top of the file */
+
+.stat-label { /* important property: value; pairs > position: relative; text-align: center; - defined at the top of the file */
+    font-size: clamp(0.6rem, 2.6vw, 1rem);
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+}
+
+#about-me { /* important property: value; pairs > display: flex; justify-content: center; align-items: center; padding: 0 7%; - defined at the top of the file */
+    gap: 2rem;
+    max-width: 1200px;
+}
+
+#profile-figure { max-width: clamp(220px, 40vw, 450px); }
+
+.profile-photo { /* important property: value; pairs > display: block; width: 100%; - defined at the top of the file */
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+#profile-figure figcaption { font-size: clamp(1.6rem, 3vw, 3rem); }
+
+#about-me-summary {
+    max-width: 500px;
+    padding: 1rem;
+}
+
+#about-me-summary h2 { /* important property: value; pairs > text-align: center; - defined at the top of the file */
+    margin-bottom: 1rem;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 300;
+}
+
+#about-me-summary p {
+    text-align: justify;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+    word-spacing: -0.5px;
+    font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+}
+
+/* About me media queries */
+@media (max-width: 1025px) {
+    #about-me-section { gap: 3rem; }
+    #about-me { flex-direction: column; }
+}
+
+@media (max-width: 600px) {
+    #about-me-status-wrapper { gap: 1rem; }
+}
+
+@media (max-width: 400px) {
+    #about-me-status-wrapper { margin-top: 1rem; }
+}
+
+/* Popular photo gallery */
+#popular-gallery-section { /* important property: value; pairs > display: flex; flex-direction: column; justify-content: center; background-color: var(--color-bg-dark); height: 100vh !important; - defined at the top of the file */
+    padding: 2.5rem 0;
+    gap: 10rem;
+}
+/* #popular-gallery-figure has important property: value; pairs > display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; - defined at the top of the file */
+#ink-img { /* important property: value; pairs > display: block; position: absolute; z-index: 0; - defined at the top of the file */
+    width: clamp(250px, 30vw, 450px);
+    animation-timing-function: ease-out;
+    animation-delay: 1.6s;
+}
+/* #popular-quote-wrapper has important property: value; pairs > display: flex; justify-content: center; align-items: center; z-index: 1; - defined at the top of the file */
+#popular-quote { font-size: clamp(2rem, 3.5vw, 3rem); } /* important property: value; pairs > text-align: center; - defined at the top of the file */
+
+@keyframes glow {
+    from { text-shadow: none; }
+    to { text-shadow: 0 0 6px var(--color-white), 0 0 12px var(--color-white), 0 0 16px var(--color-white), 0 0 24px var(--color-white); }
+}
+
+.glow { animation: glow 1s forwards; animation-delay: 1.3s; }
+
+#popular-gallery-container { /* scrollable gallery */ /* important property: value; pairs > display: flex; - defined at the top of the file*/
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0rem 7%;
+}
+
+.gallery-item {
+    flex: none; /* flex: 0 0 auto; - the same code the same work*/
+    scroll-snap-align: start;
+    max-width: 260px;
+    aspect-ratio: 4/6;
+    margin: 1rem;
+}
+/* .gallery-item img has important property: value; pairs > display: block; width: 100%; height: 100%; object-fit cover; - defined at the top of the file */
+/* Custom Scrollbar */
+#popular-gallery-container::-webkit-scrollbar { height: 12px;  /* Adjust the height of the scrollbar */ }
+#popular-gallery-container::-webkit-scrollbar-track { background-color: #1e1e1e;  /* Background of the scrollbar track */ }
+#popular-gallery-container::-webkit-scrollbar-thumb, #popular-gallery-container::-webkit-scrollbar-track { border-radius: 10px; }
+#popular-gallery-container::-webkit-scrollbar-thumb {
+    background-color: #555;  /* Color of the scrollbar thumb */
+    border: 3px solid #1e1e1e;  /* Padding around the scrollbar thumb */
+}
+#popular-gallery-container::-webkit-scrollbar-thumb:hover { background-color: var(--color-gray);  /* Color of the scrollbar thumb when hovered */ }
+
+/* Popular photo gallery media queries */
+@media (max-width: 768px) {
+    #popular-gallery-section {
+        padding: 1.25rem 0;
+        gap: 6rem;
+    }
+    .gallery-item { max-width: 200px; }
+}
+
+/* Awards Carousel */
+#carousel-section { gap: 5rem; } /* important property: value; pairs > display: flex; flex-direction: column; justify-content: center; background-color: var(--color-bg-dark); height: 100vh !important; - defined at the top of the file */
+/* #carousel-article has important property: value; pairs > display: flex; justify-content: center; - defined at the top of the file */
+#carousel-quote { font-size: clamp(1.3rem, 3vw, 3rem); } /* important property: value; pairs > display: flex; justify-content: center; align-items: center; - defined at the top of the file */
+
+.switcher-wrapper { /* important property: value; pairs > display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; - defined at the top of the file */
+    width: clamp(70px, 10vw, 150px);
+    height: 100%;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.switcher { /* important property: value; pairs > position: absolute; text-align: center; width: 100%;*/
+    top: 100%;
+    animation: slide-word 6s infinite;
+}
+
+.switcher:nth-of-type(1) { animation-delay: 0s; }
+.switcher:nth-of-type(2) { animation-delay: 3s; }
+
+@keyframes slide-word {
+    0%, 10% { top: -100%; opacity: 0; }
+    15%, 45% { top: 0; opacity: 1; }
+    50%, 60% { top: 100%; opacity: 0; }
+    60%, 100% { top: -100%; opacity: 0; }
+}
+
+#carousel-container { padding-top: 5rem; padding-bottom: 5rem; } /* important property: value; pairs > display: flex; position: relative; padding: 0 7%; overflow: hidden; */
+
+/* Carousel Controls */
+.carousel-control { /* important property: value; pairs > position: absolute; z-index: 1;*/
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    font-size: 2rem;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    height: 100%;
+    width: 7%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--color-white);
+}
+
+.carousel-control.left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg-black) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* RIGHT ARROW: fade from transparent (left) to opaque (right) */
+.carousel-control.right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg-black) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* Carousel Track */
+.carousel { transition: transform 0.5s ease-in-out; } /* important property: value; pairs > display: flex; align-items: center; - defined at the top of the file */
+
+/* Carousel Items */
+.carousel-item { /* important property: value; pairs > z-index: 1; - defined at the top of the file */
+    flex: 0 0 100%;
+    transition: transform 0.3s ease, z-index 0.3s ease;
+}
+
+/* Effect to bring the middle item closer */
+.carousel-item.active { transform: scale(1.2); /* Bringing the active item closer */ }
+/* .carousel-img-container has important property: value; pairs > display: flex; justify-content: center; - defined at the top of the file */
+/* .award-description has important property: value; pairs > width: 100%; - defined at the of the file */
+.award-description p {
+    font-size: clamp(0.7rem, 1.5vw, 1.5rem);
+    margin: 1rem 0 0 0;
+}
+
+/* Awards Carousel media queries */
+@media (max-width: 768px) {
+    #carousel-section { gap: 2rem; }
+}
+
+@media (max-width: 440px) {
+    .carousel-control.left,
+    .carousel-control.right {
+        padding: 0 2rem;
+    }
+}
+
+@media (min-width: 471px) {
+    .carousel-item { flex: 0 0 50%; /* Optionally show 2 with peeking */ }
+}
+  
+@media (min-width: 768px) {
+    .carousel-item { flex: 0 0 33.3333%; }
+}
+
+/* After care */
+/* #aftercare-section has important property: value; pairs > padding: 0 7%; - defined at the top of the file */
+/* #aftercare-article has important property: value; pairs > display: flex; flex-direction: column; - defined at the top of the file */
+#aftercare-text-content {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem 0;
+    line-height: 1.6;
+}
+
+#aftercare-text-content :is(h2, h3) {
+    margin-top: 2rem;
+    font-weight: 700;
+}
+
+#aftercare-text-content .styled-list {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+  
+#aftercare-text-content ol.styled-list { list-style: decimal; }
+  
+#aftercare-text-content :is(ul, ol) {
+    list-style: revert;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.aftercare-table { /* important property: value; pairs > display: grid; */
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    border-top: 2px solid var(--color-gray);
+ }
+  
+.aftercare-table .row { display: contents; }
+  
+.aftercare-table .row div {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--color-gray);
+}
+  
+.aftercare-table .header div {
+    font-weight: bold;
+    border-bottom: 2px solid var(--color-gray);
+}
+
+/* ---------------------------------------------------
+   FOOTER & NAV & MAP
+--------------------------------------------------- */
+
+#footer-container {  padding: 2rem 0rem; } /* important property: value; pairs > display: flex; flex-direction: column; align-items: center; - defined at the top of the file */
+
+#footer-container p { font-size: clamp(1.3rem, 5.3vw, 1.6rem); } 
+
+#footer-nav { margin: 1rem 0 1rem -3.5rem; } /* important property: value; pairs > display: flex; align-items: center; - defined at the top of the file */
+/* #social-medias has important property: value; pairs > display: flex; - defined at the top of the file */ 
+#social-medias li { padding: 0.5rem 2rem; }
+#social-medias li:last-child { place-content: center; }
+#social-medias :is(li a, li a i) {
+    margin: auto;
+    font-size: 1.5em;
+    padding-left: 1rem;
+}
+
+.fa-whatsapp{ color: var(--color-whatsapp-green); }
+
+.ins-footer{
+    background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-mask: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    mask: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+}
+
+#tiktok-glitch i { top: -15px; }
+#tiktok-base { color: var(--color-white); }
+#tiktok-cyan { color: var(--color-tiktok-cyan); transform: translate(-1px, -1px); }
+#tiktok-red { color: var(--color-instagram-tiktok-red);  transform: translate(1px, 1px); }
+
+#map-container { /* important property: value; pairs > display: flex; flex-direction: column; align-items: center; width: 100% - defined at the top of the file */
+    padding: 0 2rem;
+    height: 400px;
+}
+
+#map-container p {
+    font-size: clamp(0.9rem, 1.8vmax, 1.2rem);
+    color: var(--color-gray);
+    margin: 1rem 0 0 0;
+}
+
+#map { max-width: 500px; }
+
+.footer-line {
+    width: 200px;
+    margin: 0.5rem 0;
+    color: var(--color-gray);
+    opacity: 0.3;
+}
+
+/* Footer media queries */
+@media (max-width: 768px) {
+    #footer-nav { margin: 1rem 0; }
+    #social-medias { flex-direction: column; }
+    #social-medias li a i { float: right; }
+    #tiktok-glitch i { right: -83px; }
+}

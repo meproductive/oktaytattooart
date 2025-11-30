@@ -1,0 +1,36 @@
+# --- Node.js / Express --- 
+
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.Local
+.env.*.Local
+
+# Logs
+npm-debug.log*
+*.log
+
+# # Uploaded media
+# resources/media/*
+
+# Api / Server / Json
+api
+server.js
+package-lock
+package.json
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
+# --- Editor/IDE junk ---
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# --- Build
+dist/
+build/
