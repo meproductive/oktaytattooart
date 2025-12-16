@@ -166,87 +166,87 @@
     });
 
     
-    // ------- helper functions --------
-    const newest = (a, b) => {
-      const ta = Number((a.filename || '').split('-')[1]);
-      const tb = Number((b.filename || '').split('-')[1]);
-      return (tb || 0) - (ta || 0);
-    }   
-    const img = (item, altFallback) => {
-      const alt = item.title || altFallback || 'Photo'; 
-      return `<img src="${item.url}?v=${Date.now()}" alt="${alt}" loading="lazy" />`;
-    }
+    // // ------- helper functions --------
+    // const newest = (a, b) => {
+    //   const ta = Number((a.filename || '').split('-')[1]);
+    //   const tb = Number((b.filename || '').split('-')[1]);
+    //   return (tb || 0) - (ta || 0);
+    // }   
+    // const img = (item, altFallback) => {
+    //   const alt = item.title || altFallback || 'Photo'; 
+    //   return `<img src="${item.url}?v=${Date.now()}" alt="${alt}" loading="lazy" />`;
+    // }
 
-    //Postman API endpoints - POST  
-    //Showcase - Gallery
-    fetch('/api/photos?section=gallery')
-      .then(res => res.json())
-      .then(items => {
-        items.sort(newest);
-        const gallery = document.getElementById('photo-gallery');   
-        items.forEach(item => {
-          const figure = document.createElement('figure');
-          figure.className = 'photo-card';
-          figure.innerHTML = `
-            ${img(item, 'Tattoo Photo')}
-          <article class="card-description">
-            <h2>${item.title || 'New Ink'}</h2>
-            <p>${item.style || ''}</p>
-          </article>
-          `;
-          gallery.prepend(figure);
-        });
-      })
-      .catch( error => console.error('Gallery load failed:', error));   
-    //Popular - Gallery
-    fetch('/api/photos?section=popular')
-    .then(res => res.json())
-    .then(items => {
-      items.sort(newest);
-      const popular = document.getElementById('popular-gallery-container'); 
-      items.forEach(item => {
-        const figure = document.createElement('figure');
-        figure.className = 'gallery-item';
-        figure.innerHTML = img(item, 'Tattoo photo');
-        popular.prepend(figure);
-      });
-    })
-    .catch( error => console.error('Gallery load failed:', error)); 
-    //Award - Gallery
-    fetch('/api/photos?section=awards')
-    .then(res => res.json())
-    .then(items => {
-      const award = document.getElementById('carousel-inner');  
-      items.forEach(item => {
-        const slide = document.createElement('div');
-        slide.className = 'carousel-item';
-        slide.innerHTML = `
-          <figure class="carousel-img-container">
-            ${img(item, 'Award')}
-          </figure>
-          <article class="award-description">
-            <p>${item.title || ''}</p>
-          </article>
-        `;
-        award.prepend(slide);
-      });
-    })
-    .catch( error => console.error('Gallery load failed:', error)); 
+    // //Postman API endpoints - POST  
+    // //Showcase - Gallery
+    // fetch('/api/photos?section=gallery')
+    //   .then(res => res.json())
+    //   .then(items => {
+    //     items.sort(newest);
+    //     const gallery = document.getElementById('photo-gallery');   
+    //     items.forEach(item => {
+    //       const figure = document.createElement('figure');
+    //       figure.className = 'photo-card';
+    //       figure.innerHTML = `
+    //         ${img(item, 'Tattoo Photo')}
+    //       <article class="card-description">
+    //         <h2>${item.title || 'New Ink'}</h2>
+    //         <p>${item.style || ''}</p>
+    //       </article>
+    //       `;
+    //       gallery.prepend(figure);
+    //     });
+    //   })
+    //   .catch( error => console.error('Gallery load failed:', error));   
+    // //Popular - Gallery
+    // fetch('/api/photos?section=popular')
+    // .then(res => res.json())
+    // .then(items => {
+    //   items.sort(newest);
+    //   const popular = document.getElementById('popular-gallery-container'); 
+    //   items.forEach(item => {
+    //     const figure = document.createElement('figure');
+    //     figure.className = 'gallery-item';
+    //     figure.innerHTML = img(item, 'Tattoo photo');
+    //     popular.prepend(figure);
+    //   });
+    // })
+    // .catch( error => console.error('Gallery load failed:', error)); 
+    // //Award - Gallery
+    // fetch('/api/photos?section=awards')
+    // .then(res => res.json())
+    // .then(items => {
+    //   const award = document.getElementById('carousel-inner');  
+    //   items.forEach(item => {
+    //     const slide = document.createElement('div');
+    //     slide.className = 'carousel-item';
+    //     slide.innerHTML = `
+    //       <figure class="carousel-img-container">
+    //         ${img(item, 'Award')}
+    //       </figure>
+    //       <article class="award-description">
+    //         <p>${item.title || ''}</p>
+    //       </article>
+    //     `;
+    //     award.prepend(slide);
+    //   });
+    // })
+    // .catch( error => console.error('Gallery load failed:', error)); 
     
-      //Postman API endpoints - DELETE  
-      function deletePhoto(filename) {
-        fetch(`/api/photos/${filename}`, {
-          method: 'DELETE'
-        })
-        .then(res => {
-          if (!res.ok) throw new Error('Failed to delete');
-          return res.json();
-        })
-        .then(data => {
-          console.log('Deleted', data); 
-          document.querySelector(`[data-filename="${filename}"]`)?.remove();
-        })
-        .catch(err => console.error(err));
-      }
+    //   //Postman API endpoints - DELETE  
+    //   function deletePhoto(filename) {
+    //     fetch(`/api/photos/${filename}`, {
+    //       method: 'DELETE'
+    //     })
+    //     .then(res => {
+    //       if (!res.ok) throw new Error('Failed to delete');
+    //       return res.json();
+    //     })
+    //     .then(data => {
+    //       console.log('Deleted', data); 
+    //       document.querySelector(`[data-filename="${filename}"]`)?.remove();
+    //     })
+    //     .catch(err => console.error(err));
+    //   }
 
 });

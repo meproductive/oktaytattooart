@@ -3,10 +3,10 @@
 --------------------------------------------------- */
 :root {
     /* colors */
-    --color-white: hsl(255, 100%, 100%);
-    --color-bg-black: hsl(0, 0%, 0%);  /* 1 */
-    --color-bg-dark-09: hsla(0, 0%, 0%, 0.9); /* 0.9 */
-    --color-overlay-06:  hsla(0, 0%, 0%, 0.6); /* 0.6 */
+    --color-white: hsl(255 100% 100%);
+    --color-bg-black: hsl(0 0% 0%);  /* 1 */
+    --color-bg-dark-09: hsl(0 0% 0% / 0.9); /* 0.9 */
+    --color-overlay-06:  hsl(0 0% 0% / 0.6); /* 0.6 */
     --color-gray: #ccc;
     --color-whatsapp-green: #4CAF50;
     --color-instagram-tiktok-red: #F50057;
@@ -32,7 +32,7 @@ html { scroll-behavior: smooth; box-sizing: border-box; }
 
 body, button { color: var(--color-white) !important; font-family: var(--font-roboto); font-weight: 300; }
 
-h2, figcaption, .stat-label, #popular-quote, .switcher, .award-description p { text-align: center; }
+h2, figcaption, .stat-label, #popular-quote, .switcher, .award-description p, .review-card { text-align: center; }
 
 strong { font-weight: 400; font-style: normal; }
 
@@ -52,18 +52,18 @@ button { border: none; background-color: transparent; }
 
 #hamburger-btn, #x-btn { width: 1.875rem; height: 1.875rem; } /* Hamburger button's and booking modal's custom X button's wraps' 30px width and height */
 
-#hero, #intro, #booking-appointment, #about-me-section, #popular-gallery-section, #carousel-section { height: 100dvh !important; } /* #intro is set to 100vh down below with other items */ 
+#hero, #intro, #booking-appointment, #about-me-section, #popular-gallery-section, #carousel-section, #review-section { height: 100dvh !important; } /* #intro is set to 100vh down below with other items */ 
 @media only screen and (orientation: landscape) and (max-height: 769px) { /* Resetting height: 100vh; to 100% to prevent overlayings */
     #about-me-section, #popular-gallery-section, #carousel-section { height: 100% !important; overflow: hidden; } #popular-gallery-section, #carousel-section { padding: 6rem 0 !important; gap: 6rem !important; } 
 }
 
-#hero, #quote-highlight, #booking-modal, #booking-socials, .photo-card, #about-me-section, .stat-item, #popular-gallery-section, #popular-gallery-figure, #carousel-section, #carousel-section-item, .switcher-wrapper, #aftercare-article, #footer-container, #map-container { display: flex; flex-direction: column; } /* <--- All these items have two or more items nested inside, instead of grid layout I preferred flex-box column layout because as I've mentioned some of have more than two items nested so I could solve by applying two these props and values in short hand */
+#hero, #quote-highlight, #booking-modal, #booking-socials, .photo-card, #about-me-section, .stat-item, #popular-gallery-section, #popular-gallery-figure, #carousel-section, #carousel-section-item, .switcher-wrapper, #review-section, .review-image, #aftercare-article, #footer-container, #map-container { display: flex; flex-direction: column; } /* <--- All these items have two or more items nested inside, instead of grid layout I preferred flex-box column layout because as I've mentioned some of have more than two items nested so I could solve by applying two these props and values in short hand */
 
-#social-menu, #header, #menu, #burger-line::before, #burger-line::after, #intro-article, #x-line, #booking-appointment, .title-wrapper, .card-description, .status-container, #about-me, #popular-quote-wrapper, #popular-gallery-container, #carousel-article, #carousel-quote, #carousel-container, #carousel-inner, .carousel-img-container, #footer-nav, #social-medias { display: flex; } /* <--- All these items have flex-box layout and some are aligned center, justified center, both below or not centered due to their layouts */
+#social-menu, #header, #menu, #burger-line::before, #burger-line::after, #intro-article, #x-line, #booking-appointment, .title-wrapper, .card-description, .status-container, #about-me, #popular-quote-wrapper, #popular-gallery-container, #carousel-article, #carousel-quote, #carousel-container, #carousel-inner, .carousel-img-container, #review-container, #reviews-article, #footer-nav, #social-medias { display: flex; } /* <--- All these items have flex-box layout and some are aligned center, justified center, both below or not centered due to their layouts */
 
-#social-menu, #popular-gallery-section, #carousel-section, #carousel-article, .carousel-img-container { justify-content: center; } /* <--- All these items are flex-box and only justified center */
+#social-menu, #popular-gallery-section, #carousel-section, #carousel-article, .carousel-img-container, #review-section, #reviews-article { justify-content: center; } /* <--- All these items are flex-box and only justified center */
 
-#header, #menu, #hamburger-btn, .title-wrapper, .card-description, .switcher-wrapper, #carousel-inner, #footer-container, #footer-nav, #map-container { align-items: center; } /* <--- All these items are flex-box and only aligned center */
+#header, #menu, #hamburger-btn, .title-wrapper, .card-description, .switcher-wrapper, #carousel-inner, .review-image, #footer-container, #footer-nav, #map-container { align-items: center; } /* <--- All these items are flex-box and only aligned center */
 
 #booking-appointment, #booking-socials, #about-me-section, .stat-item, #about-me, #popular-gallery-figure, #popular-quote-wrapper, #carousel-quote { justify-content: center; align-items: center; } /* <--- All these items are flex-box and in both axis centered */
 
@@ -75,15 +75,16 @@ button { border: none; background-color: transparent; }
 
 #header, #intro-article, .title-wrapper, #photo-gallery, #about-me, #carousel-container, #aftercare-section { padding: 0rem 7%; } /* <--- All these items are having on the right and left white-spaces */
 
-#video-container, .photo-card, .stat-item, .switcher-wrapper, #carousel-container { overflow: hidden; } /* !Important layout feature don't change unless it's strictly necessary */
+#video-container, #about-me-section, .photo-card, .stat-item, #popular-gallery-section, .switcher-wrapper, #carousel-container, #review-section { overflow: hidden; } /* !Important layout feature don't change unless it's strictly necessary */
 
 .photo-card img, .gallery-item img { height: 100%; object-fit: cover; } /* important propert: value; pairs > display: block; width: 100% - defined in global scope or group above */
 
-main, #intro { background-color: var(--color-bg-dark-09); }
-footer, #blackout-overlay, #about-me-section, #popular-gallery-section ,#carousel-section { background-color: var(--color-bg-black); }
-#burger-line, #burger-line::before, #burger-line::after,  #hamburger-btn.active #burger-line::before,  #hamburger-btn.active #burger-line::after, #x-line, #x-line::after, .line { background-color: var(--color-white); }
+main { background-color: hsl(0 0% 0% / 0.39);}
+#intro, body { background: var(--color-bg-dark-09); }
+footer, #blackout-overlay, #about-me-section, #popular-gallery-section ,#carousel-section, #review-section { background-color: var(--color-bg-black); }
+#burger-line, #burger-line::before, #burger-line::after, #hamburger-btn.active #burger-line::before, #hamburger-btn.active #burger-line::after, #x-line, #x-line::after, .line { background-color: var(--color-white); }
 
-strong, #profile-figure figcaption, #popular-quote, #carousel-quote, .switcher  { font-family: var(--font-prata); }
+strong, #profile-figure figcaption, #popular-quote, #carousel-quote, .switcher, #reviews-article p  { font-family: var(--font-prata); }
 a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important */
 /* Opacity value */
 .fade-in-animation, #booking-appointment, .subtitle, [data-animate], .stat-icon, .switcher { opacity: 0; }
@@ -93,6 +94,12 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 #video-container, .stat-icon, #ink-img { z-index: var(--layer-mid); } /* Index value is 0 */
 #primary-social, #hamburger-btn, #glassy-button, #video-container:after, .stat-item, .carousel-item, .carousel-control, #popular-quote-wrapper { z-index: var(--layer-front); } /* Index value is 1 */
 #header, #booking-appointment, #blackout-overlay { z-index: var(--layer-top); } /* Index value is 2 */
+
+.rounded {
+    border-radius: 50%;
+    width: clamp(75px, 20vw, 160px);
+    height: clamp(75px, 20vw, 160px);
+}
 
 /* ---------------------------------------------------
    LAYOUT UTILITIES - HELPERS
@@ -170,6 +177,7 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 .fade-in-down { animation: fadeindown 1s forwards; }
 .fade-in-down-right { animation: fadeindownright 1s forwards; animation-delay: 1s; }
 .fade-in-up { animation: fadeinup 1s forwards; animation-delay: 0.4s; }
+.fade-in { animation: fadeIn 1s forwards; }
 /* ---------------------------------------------------
    BACKGROUND & WRAPPERS
 --------------------------------------------------- */
@@ -539,9 +547,6 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 
 .stat-item { /* important property: value; pairs > display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; z-index: 1; - defined at the top of the file */
     background-color: #121212;
-    border-radius: 50%;
-    width: clamp(75px, 20vw, 160px);
-    height: clamp(75px, 20vw, 160px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
@@ -639,7 +644,7 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 
 .glow { animation: glow 1s forwards; animation-delay: 1.3s; }
 
-#popular-gallery-container { /* scrollable gallery */ /* important property: value; pairs > display: flex; - defined at the top of the file*/
+.scroll-container { /* scrollable gallery */ /* important property: value; pairs > display: flex; - defined at the top of the file*/
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -768,6 +773,34 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
     .carousel-item { flex: 0 0 33.3333%; }
 }
 
+/* Reviews */
+
+#review-section { gap: 3rem; }
+
+#reviews-article { gap: 0.5rem; }
+
+#reviews-article p { font-size: clamp(1.6rem, 2.5vw, 5rem); }
+#trust { animation-delay: 1s; }
+#ink { animation-delay: 1.3s; }
+
+#review-container { justify-content: center; } @media (max-width: 1480px) {
+    #review-container { justify-content: flex-start; } .review-card { margin: 1rem 2rem; }
+} #review-container::-webkit-scrollbar { display: none; }
+
+.review-card {
+    flex: none;
+    scroll-snap-align: center;
+    max-width: 320px;
+    /* margin: 1rem; */
+    /* border: 1px solid #ccc; */
+}
+
+.review-card > * { padding: 1rem 0; }
+
+.review { font-size: clamp(1.1rem, 1.8vw, 1.3rem); }
+
+.fa-star { color: rgb(252, 223, 5); }
+
 /* After care */
 /* #aftercare-section has important property: value; pairs > padding: 0 7%; - defined at the top of the file */
 /* #aftercare-article has important property: value; pairs > display: flex; flex-direction: column; - defined at the top of the file */
@@ -802,7 +835,7 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
     gap: 0.5rem;
     margin-top: 1rem;
     border-top: 2px solid var(--color-gray);
- }
+}
   
 .aftercare-table .row { display: contents; }
   
