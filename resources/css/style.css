@@ -59,13 +59,13 @@ button { border: none; background-color: transparent; }
 
 #hero, #quote-highlight, #booking-modal, #booking-socials, .photo-card, #about-me-section, .stat-item, #popular-gallery-section, #popular-gallery-figure, #carousel-section, #carousel-section-item, .switcher-wrapper, #review-section, .review-image, #aftercare-article, #footer-container, #map-container { display: flex; flex-direction: column; } /* <--- All these items have two or more items nested inside, instead of grid layout I preferred flex-box column layout because as I've mentioned some of have more than two items nested so I could solve by applying two these props and values in short hand */
 
-#social-menu, #header, #menu, #burger-line::before, #burger-line::after, #intro-article, #x-line, #booking-appointment, .title-wrapper, .card-description, .status-container, #about-me, #popular-quote-wrapper, #popular-gallery-container, #carousel-article, #carousel-quote, #carousel-container, #carousel-inner, .carousel-img-container, #review-container, #reviews-article, #footer-nav, #social-medias { display: flex; } /* <--- All these items have flex-box layout and some are aligned center, justified center, both below or not centered due to their layouts */
+#social-menu, #header, #menu, #burger-line::before, #burger-line::after, #intro-article, #x-line, #booking-appointment, .title-wrapper, .card-description, .status-container, #about-me, #popular-quote-wrapper, #popular-gallery-container, #carousel-article, #carousel-quote, #carousel-container, #carousel-inner, .carousel-img-container, #review-container, #reviews-article, #review-btn-container, #footer-nav, #social-medias { display: flex; } /* <--- All these items have flex-box layout and some are aligned center, justified center, both below or not centered due to their layouts */
 
 #social-menu, #popular-gallery-section, #carousel-section, #carousel-article, .carousel-img-container, #review-section, #reviews-article { justify-content: center; } /* <--- All these items are flex-box and only justified center */
 
 #header, #menu, #hamburger-btn, .title-wrapper, .card-description, .switcher-wrapper, #carousel-inner, .review-image, #footer-container, #footer-nav, #map-container { align-items: center; } /* <--- All these items are flex-box and only aligned center */
 
-#booking-appointment, #booking-socials, #about-me-section, .stat-item, #about-me, #popular-gallery-figure, #popular-quote-wrapper, #carousel-quote { justify-content: center; align-items: center; } /* <--- All these items are flex-box and in both axis centered */
+#booking-appointment, #booking-socials, #about-me-section, .stat-item, #about-me, #popular-gallery-figure, #popular-quote-wrapper, #carousel-quote, #review-btn-container { justify-content: center; align-items: center; } /* <--- All these items are flex-box and in both axis centered */
 
 #page-content, #hamburger-btn, #x-btn, #photo-gallery, .switcher-wrapper, #carousel-container, #popular-gallery-figure, .photo-card, .status-container, .stat-item, .stat-number, .stat-label, #tiktok-glitch { position: relative; } /* <--- All these items are positioned relatively on a purpose */
 
@@ -88,7 +88,7 @@ strong, #profile-figure figcaption, #popular-quote, #carousel-quote, .switcher, 
 a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important */
 /* Opacity value */
 .fade-in-animation, #booking-appointment, .subtitle, [data-animate], .stat-icon, .switcher { opacity: 0; }
-#booking-appointment.active, .title-wrapper.draw-title, [data-glow] { opacity: 1; }
+#booking-appointment.active, .title-wrapper.draw-title, [data-glow], .lineY.drawLineY { opacity: 1; }
 
 #custom-background { z-index: var(--layer-behind); } /* Index value is -1 */
 #video-container, .stat-icon, #ink-img { z-index: var(--layer-mid); } /* Index value is 0 */
@@ -177,7 +177,7 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 .fade-in-down { animation: fadeindown 1s forwards; }
 .fade-in-down-right { animation: fadeindownright 1s forwards; animation-delay: 1s; }
 .fade-in-up { animation: fadeinup 1s forwards; animation-delay: 0.4s; }
-.fade-in { animation: fadeIn 1s forwards; }
+.fade-in { animation: fadeIn 1.3s forwards; }
 /* ---------------------------------------------------
    BACKGROUND & WRAPPERS
 --------------------------------------------------- */
@@ -779,9 +779,9 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 
 #reviews-article { gap: 0.5rem; }
 
-#reviews-article p { font-size: clamp(1.6rem, 2.5vw, 5rem); }
+#reviews-article p { font-size: clamp(1.9rem, 5vw, 4rem); }
 #trust { animation-delay: 1s; }
-#ink { animation-delay: 1.3s; }
+#ink { animation-delay: 1.6s; }
 
 #review-container { justify-content: center; } @media (max-width: 1480px) {
     #review-container { justify-content: flex-start; } .review-card { margin: 1rem 2rem; }
@@ -791,8 +791,6 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
     flex: none;
     scroll-snap-align: center;
     max-width: 320px;
-    /* margin: 1rem; */
-    /* border: 1px solid #ccc; */
 }
 
 .review-card > * { padding: 1rem 0; }
@@ -800,6 +798,33 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 .review { font-size: clamp(1.1rem, 1.8vw, 1.3rem); }
 
 .fa-star { color: rgb(252, 223, 5); }
+
+#review-btn-container { gap: 1rem; }
+
+.lineY {
+    margin: 0;
+    height: 100%;
+    transform: scaleY(0);
+}
+
+@keyframes drawLineY {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+.lineY.drawLineY {
+    transform-origin: center;
+    animation: drawLineY 1s ease-out forwards;
+}
+
+#review-btn-container a {
+    font-size: clamp(0.9rem, 1.6vw, 1.3rem);
+    border: 1px solid #434242;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+#reviews-source { text-align: center; text-decoration: underline; }
 
 /* After care */
 /* #aftercare-section has important property: value; pairs > padding: 0 7%; - defined at the top of the file */
@@ -889,7 +914,7 @@ a, #aftercare-text-content * { font-family: var(--font-roboto); } /* !Important 
 }
 
 #map-container p {
-    font-size: clamp(0.9rem, 1.8vmax, 1.2rem);
+    font-size: clamp(0.85rem, 1.8vmax, 1.2rem);
     color: var(--color-gray);
     margin: 1rem 0 0 0;
 }
